@@ -1,17 +1,17 @@
-// models/Teacher.js
+// models/Master.js
 
 const mongoose = require('mongoose');
 
-const teacherSchema = new mongoose.Schema({
-  teacher_id: {
+const masterSchema = new mongoose.Schema({
+  master_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  additional_teacher_info: {
+  additional_master_info: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model('Teacher', teacherSchema);
+module.exports = mongoose.model('Master', masterSchema);
