@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
-
-const studentSchema = new mongoose.Schema({
-  student_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  additional_student_info: {
-    type: String,
-    required: true,
-  },
+const mongoose=require('mongoose');
+const studentSchema=new mongoose.Schema({
+ user_id:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true,
+ },
+ additonal_info:{
+    "type": String,
+    required:false,
+ }
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+const studentModel=mongoose.model('Student',studentSchema);
+module.exports=studentModel;

@@ -1,17 +1,15 @@
-// models/Teacher.js
-
-const mongoose = require('mongoose');
-
-const teacherSchema = new mongoose.Schema({
-  teacher_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  additional_teacher_info: {
-    type: String,
-    required: true,
-  },
+const mongoose=require('mongoose');
+const teacherSchema=new mongoose.Schema({
+ user_id:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true,
+ },
+ additonal_info:{
+    "type": String,
+    required:false,
+ }
 });
 
-module.exports = mongoose.model('Teacher', teacherSchema);
+const teacherModel=mongoose.model('Teacher',teacherSchema);
+module.exports=teacherModel;

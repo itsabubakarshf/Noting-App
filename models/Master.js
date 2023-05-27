@@ -1,17 +1,15 @@
-// models/Master.js
-
-const mongoose = require('mongoose');
-
-const masterSchema = new mongoose.Schema({
-  master_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  additional_master_info: {
-    type: String,
-    required: true,
-  },
+const mongoose=require('mongoose');
+const masterSchema=new mongoose.Schema({
+ user_id:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true,
+ },
+ additonal_info:{
+    "type": String,
+    required:false,
+ }
 });
 
-module.exports = mongoose.model('Master', masterSchema);
+const masterModel=mongoose.model('Master',masterSchema);
+module.exports=masterModel;

@@ -1,45 +1,37 @@
 const express = require('express');
-const app = express();
 const dotenv = require('dotenv');
-const cors = require("cors");
-const chalk = require("chalk");
+const cors = require('cors');
+const chalk = require('chalk');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user');
 const bodyParser = require('body-parser');
+const userRoute=require('./routes/user');
 
-//dotenv config
+const app = express();
 dotenv.config();
-//cors
+
+//config cors
 app.use(cors());
-// Parse incoming requests with JSON payloads
+
+//config body-parser
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
 
 const port = process.env.PORT || 3000;
 
-
+//connect to MongoDB
 mongoose.set("strictQuery", true);
-// Connect to MongoDB database
-mongoose
-  .connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  })
-  .then(() => console.log("DB Connection Successful!"))
-  .catch((err) => {
-    console.log(err);
-    process.exit(1); // Exit the process if the connection fails
-  });
+}).then(() => { console.log("DB connection is successful") })
+    .catch((err) => { console.log(err) })
 
-// Register user routes
-app.use('/api/user', userRoutes);
+//using user route
+app.use('/api/user',userRoute);
 
+//Listner
 app.listen(port, () => {
     console.log(
-        chalk.green.inverse(
-            "Hurrah! App is Running, http://localhost:" + chalk.black(port)
-        )
-    );
-});
+        chalk.green.inverse("Server is running on http://localhost:" + chalk.yellow(port))
+    )
+})
