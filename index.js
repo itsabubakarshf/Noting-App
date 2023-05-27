@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoute=require('./routes/user');
+const teacherRoute=require('./routes/teacher');
 
 const app = express();
 dotenv.config();
@@ -28,6 +29,8 @@ mongoose.connect(process.env.MONGO_URL, {
 
 //using user route
 app.use('/api/user',userRoute);
+app.use('/api/teacher',teacherRoute);
+
 
 //Listner
 app.listen(port, () => {
