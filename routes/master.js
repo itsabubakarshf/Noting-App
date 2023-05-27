@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const Teacher = require('../models/Teacher');
+const Master = require('../models/Master');
 
 router.post('/register', async (req, res) => {
   try {
@@ -18,20 +18,20 @@ router.post('/register', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Check if the user is already a teacher
-    if (user.userType === 'teacher') {
-      return res.status(400).json({ error: 'User is already a teacher' });
+    // Check if the user is already a master
+    if (user.userType === 'master') {
+      return res.status(400).json({ error: 'User is already a master' });
     }
 
-    // Update user type to "teacher"
-    user.userType = 'teacher';
+    // Update user type to "master"
+    user.userType = 'master';
     await user.save();
 
-    // Create a new teacher record
-    const teacher = new Teacher({ user_id: id,additonal_info:additonal_info });
+    // Create a new master record
+    const master = new Master({ user_id: id,additonal_info:additonal_info });
 
-    // Save the teacher record
-    await teacher.save();
+    // Save the master record
+    await master.save();
 
     res.status(200).json({ message: 'Registration successful' });
   } catch (error) {
